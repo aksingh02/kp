@@ -73,6 +73,44 @@
             }
         }
 
+        /* Love letters floating */
+        .floating-letters {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .love-letter-float {
+            position: absolute;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6b9d;
+            animation: letterFloat 10s linear infinite;
+            opacity: 0.8;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+        }
+
+        @keyframes letterFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         .sparkles {
             position: fixed;
             top: 0;
@@ -107,6 +145,40 @@
             100% {
                 transform: translateY(-50px) rotate(720deg);
                 opacity: 0;
+            }
+        }
+
+        /* Birthday balloons */
+        .birthday-balloons {
+            position: fixed;
+            bottom: -50px;
+            right: 20px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 40px;
+            animation: balloonFloat 4s ease-in-out infinite;
+        }
+
+        .balloon:nth-child(2) {
+            right: 60px;
+            animation-delay: 0.5s;
+        }
+
+        .balloon:nth-child(3) {
+            right: 120px;
+            animation-delay: 1s;
+        }
+
+        @keyframes balloonFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(-2deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(2deg);
             }
         }
 
@@ -172,6 +244,56 @@
             }
         }
 
+        /* Birthday countdown */
+        .age-display {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+            animation: ageGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes ageGlow {
+            0% {
+                box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+            }
+            100% {
+                box-shadow: 0 8px 25px rgba(255, 107, 157, 0.8);
+            }
+        }
+
+        /* Special birthday badge */
+        .birthday-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #f8b500, #ff6b35);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(248, 181, 0, 0.4);
+            animation: badgePulse 1.5s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+
         .welcome-title {
             font-family: 'Dancing Script', cursive;
             font-size: 3rem;
@@ -202,6 +324,72 @@
             color: #666;
             margin-bottom: 30px;
             font-weight: 400;
+        }
+
+        /* Love meter */
+        .love-meter {
+            position: relative;
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .love-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d, #f8b500);
+            border-radius: 4px;
+            animation: loveFill 3s ease-out forwards;
+            position: relative;
+        }
+
+        .love-fill::after {
+            content: '❤️';
+            position: absolute;
+            right: -15px;
+            top: -8px;
+            font-size: 20px;
+            animation: heartPump 1s ease-in-out infinite;
+        }
+
+        @keyframes loveFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes heartPump {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Special message reveal */
+        .special-reveal {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            border: 2px solid #ff6b9d;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .special-reveal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         /* Enhanced buttons */
@@ -461,48 +649,72 @@
         .knife {
             position: absolute;
             top: 60px;
-            left: -40px;
-            width: 80px;
-            height: 20px;
-            background: linear-gradient(45deg, #c0c0c0, #e8e8e8);
-            border-radius: 10px 2px 2px 10px;
-            transform: rotate(-20deg);
+            left: 0;
+            width: 100px;
+            height: 8px;
+            transform: rotate(-25deg);
             cursor: grab;
             z-index: 10;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .knife:hover {
-            transform: rotate(-20deg) scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transform: rotate(-25deg) scale(1.1);
+            filter: brightness(1.1);
         }
 
         .knife:active {
             cursor: grabbing;
         }
 
+        /* Knife blade */
         .knife::before {
-            content: '';
-            position: absolute;
-            right: 3px;
-            top: 2px;
-            width: 12px;
-            height: 16px;
-            background: linear-gradient(45deg, #8b4513, #a0522d);
-            border-radius: 2px;
-        }
-
-        .knife::after {
             content: '';
             position: absolute;
             left: 0;
             top: 0;
-            width: 60px;
-            height: 20px;
-            background: linear-gradient(90deg, #e8e8e8, #f5f5f5, #c0c0c0);
-            border-radius: 10px 2px 2px 10px;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            width: 70px;
+            height: 8px;
+            background: linear-gradient(to right, #f8f9fa 0%, #e9ecef 20%, #dee2e6 50%, #ced4da 80%, #adb5bd 100%);
+            border-radius: 0 4px 4px 0;
+            box-shadow: 
+                0 0 3px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.8),
+                inset 0 -1px 0 rgba(0,0,0,0.1);
+        }
+
+        /* Knife handle */
+        .knife::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -2px;
+            width: 35px;
+            height: 12px;
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 30%, #cd853f  70%, #daa520 100%);
+            border-radius: 6px;
+            box-shadow: 
+                0 2px 4px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.2),
+                inset 0 -1px 0 rgba(0,0,0,0.2);
+        }
+
+        /* Add knife handle grip texture */
+        .knife-handle-grip {
+            position: absolute;
+            right: 5px;
+            top: -1px;
+            width: 25px;
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent 0px,
+                transparent 1px,
+                rgba(0,0,0,0.1) 1px,
+                rgba(0,0,0,0.1) 2px
+            );
+            border-radius: 5px;
+            pointer-events: none;
         }
 
         .cut-line {
@@ -835,14 +1047,34 @@
 <body>
     <div class="love-background"></div>
     <div class="floating-hearts"></div>
+    <div class="floating-letters"></div>
     <div class="sparkles"></div>
+    
+    <!-- Birthday balloons -->
+    <div class="birthday-balloons">
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+    </div>
 
     <!-- Welcome Page -->
     <div class="page active" id="welcome-page">
         <div class="welcome-card">
+            <div class="birthday-badge">🎂 Special Day 🎂</div>
+            <div class="age-display">25 ✨</div>
             <h1 class="welcome-title">Happy Birthday Kaivy! 🎉</h1>
             <p class="welcome-subtitle">Wishing you many many returns of the day.
                 Today is your very special day, my Love❤️✨</p>
+            
+            <div class="special-reveal">
+                <strong>💕 336 Days of Pure Love 💕</strong>
+            </div>
+            
+            <div class="love-meter">
+                <div class="love-fill"></div>
+            </div>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">My Love for You Meter 📈</p>
+            
             <button class="magic-btn" id="start-btn">
                 🎁 Start Your Surprise
             </button>
@@ -897,7 +1129,9 @@
             <div class="cake-cutting-container">
                 <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
                     alt="Birthday Cake" class="cake-img" id="cake-img">
-                <div class="knife" id="knife"></div>
+                <div class="knife" id="knife">
+                    <div class="knife-handle-grip"></div>
+                </div>
             </div>
             <div class="instructions" id="cut-instruction">Drag the knife across the cake to cut it! 🔪</div>
             <button class="magic-btn hidden" id="see-message-btn">
@@ -909,11 +1143,11 @@
     <!-- Message Page -->
     <div class="page" id="message-page">
         <div class="message-container">
-            <h1 class="message-title">Happy 25th Birthday Kavita(My Kaivy)❤️❤️❤️❤️❤️</h1>
+            <h1 class="message-title">Happiest 25th Birthday my dear Kavita❤️❤️❤️❤️❤️</h1>
 
             <div class="love-letter">
                 <div class="letter-content">
-                    <p style="animation-delay: 0.2s">My Dearest Kavita,</p>
+                    <p style="animation-delay: 0.2s">My Dearest Kaviy,</p>
 
                     <p style="animation-delay: 0.4s">Today marks another wonderful year of your beautiful life, and I
                         couldn't be happier to share this journey with you. As you turn <strong
@@ -967,37 +1201,37 @@
             <div class="memory-gallery">
                 <div class="memory-item">
                     <div class="memory-img"
-                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/kp/images/1st-day.jpg');">
                         <div class="memory-caption">The day we met ✨</div>
                     </div>
                 </div>
                 <div class="memory-item">
                     <div class="memory-img"
-                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1494774157365-9e04c6720e47?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/kp/images/first-date.jpg');">
                         <div class="memory-caption">Our first date 💕</div>
                     </div>
                 </div>
                 <div class="memory-item">
                     <div class="memory-img"
-                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/kp/images/celeb-together.jpg');">
                         <div class="memory-caption">Celebrating together 🎉</div>
                     </div>
                 </div>
                 <div class="memory-item">
                     <div class="memory-img"
-                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/kp/images/adventure.jpg');">
                         <div class="memory-caption">Our adventures 🌍</div>
                     </div>
                 </div>
                 <div class="memory-item">
                     <div class="memory-img"
-                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/kp/images/quiet-moments.jpg');">
                         <div class="memory-caption">Quiet moments 💝</div>
                     </div>
                 </div>
                 <div class="memory-item">
                     <div class="memory-img"
-                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">
+                        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/kp/images/making-memories.jpg');">
                         <div class="memory-caption">Making memories 📷</div>
                     </div>
                 </div>
@@ -1020,6 +1254,7 @@
         // Initialize everything when page loads
         document.addEventListener('DOMContentLoaded', function () {
             createFloatingHearts();
+            createFloatingLetters();
             createSparkles();
             initializeEventListeners();
             animateLetterContent();
@@ -1045,6 +1280,28 @@
                     }, 10000);
                 }
             }, 1200);
+        }
+
+        // Create floating love letters
+        function createFloatingLetters() {
+            const lettersContainer = document.querySelector('.floating-letters');
+            const loveWords = ['LOVE', 'KAIVY', '💖', 'ANKUR', '25', '🎂', 'HAPPY', '❤️'];
+
+            setInterval(() => {
+                if (Math.random() < 0.2) {
+                    const letter = document.createElement('div');
+                    letter.className = 'love-letter-float';
+                    letter.innerHTML = loveWords[Math.floor(Math.random() * loveWords.length)];
+                    letter.style.left = Math.random() * 100 + '%';
+                    letter.style.animationDuration = (Math.random() * 3 + 8) + 's';
+                    letter.style.fontSize = (Math.random() * 8 + 14) + 'px';
+                    lettersContainer.appendChild(letter);
+
+                    setTimeout(() => {
+                        letter.remove();
+                    }, 12000);
+                }
+            }, 2000);
         }
 
         // Create sparkles
@@ -1179,7 +1436,7 @@
 
             const knife = document.getElementById('knife');
             knife.style.cursor = 'grabbing';
-            knife.style.transform = 'rotate(-20deg) scale(1.1)';
+            knife.style.transform = 'rotate(-25deg) scale(1.1)';
         }
 
         function dragKnife(e) {
@@ -1198,10 +1455,10 @@
                 clientX = e.touches[0].clientX;
             }
 
-            const newLeft = clientX - containerRect.left - 40;
-            const maxLeft = containerRect.width - 40;
+            const newLeft = clientX - containerRect.left - 50;
+            const maxLeft = containerRect.width - 50;
 
-            if (newLeft >= -40 && newLeft <= maxLeft) {
+            if (newLeft >= -50 && newLeft <= maxLeft) {
                 knife.style.left = newLeft + 'px';
 
                 // Check if cut is complete
@@ -1217,7 +1474,7 @@
             isDragging = false;
             const knife = document.getElementById('knife');
             knife.style.cursor = 'grab';
-            knife.style.transform = 'rotate(-20deg) scale(1)';
+            knife.style.transform = 'rotate(-25deg) scale(1)';
         }
 
         // Complete the cake cutting
